@@ -1,0 +1,3 @@
+#form_principal fieldset:not(:first-of-type) {
+	display: none;
+}
