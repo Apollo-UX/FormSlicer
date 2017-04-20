@@ -28,18 +28,29 @@
 </head>
 
 <body>
-<form id="form_principal">
-    <fieldset class="ativo">
-        <input type="password">
-        <input type="text">
-        <input type="button" name="prox1" onclick="ex(0)"  value="avançar" id="button" />
-    </fieldset>
-    <fieldset class="fs">
-        <input type="password">
-        <input type="text">
-        <input type="button" name="prox2" onclick="ex(1)" class="next action-button" id="button" value="voltar" />
-    </fieldset>
-</form>
+    <form id="form_principal">
+        <fieldset class="ativo">
+            <h2>Primeira tabela</h2>
+            <input type="text" oninput="validar(this)" id="name" placeholder="Digite seu nome..." class="form-control" required>
+            <input type="button" name="prox1" class="btn btn-info disabled btn-ativo" onclick=prox() value="avançar" id="button" />
+        </fieldset>
+        <fieldset class="fs">
+            <h2>Segunda tabela</h2>
+            <input type="text" oninput="validar(this)" id="name" placeholder="Digite seu nome..." class="form-control" required>
+            <input type="button" name="prox1" class="btn btn-info disabled" onclick=prox() value="avançar" id="button" />
+        </fieldset>
+        <fieldset class="fs">
+            <h2>Terceira tabela</h2>
+            <input type="text" oninput="validar()" id="name" placeholder="Digite seu nome..." class="form-control" required>
+            <input type="button" name="prox1" class="btn btn-info disabled" onclick=prox() value="avançar" id="button" />
+        </fieldset>
+        <fieldset class="fs">
+            <h2>Quarta tabela</h2>
+            <input type="password">
+            <input type="text">
+            <input type="button" name="prox2" onclick=prox() class="button" value="avançar" />
+        </fieldset>
+    </form>
 </body>
 
 </html>
