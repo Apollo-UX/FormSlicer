@@ -1,9 +1,18 @@
-/**
- * Ao clicar no botão "Começar processo" esconde todas as fieldsets que não sejam o primeiro
- * Atenção para o queryselector que escolhe todos que não sejam o primeiro do tipo escolhido seria algo como (!first-fieldset)
+/** not:
+ * 
+ * Partes: 
+ * 
+ * 1. Ao clicar no botão "Começar processo" esconde todas as fieldsets que não sejam o primeiro,
+ * atenção para o seletor css que utilizei que escolhe todos que não sejam o primeiro do tipo
+ * escolhido seria algo como (!firstFieldset).
+ * 
+ * 2. Eventlistener para o next e previous, tive que colocar no if 
+ * pq elementos dinamicos criados com DOM não são automaticamente 
+ * add ao event listener. Ele então reconhece se o target tem a classe desejada.
  */
 
 function main() {
+    //1.
     document.getElementById("btn-start").addEventListener("click", function () {
         var fieldsets = document.querySelectorAll("fieldset:not(:first-of-type)");
         var fieldsetsArr = Array.prototype.slice.call(fieldsets);
@@ -14,43 +23,124 @@ function main() {
         criarBotoes();
     });
 
-    // var fieldsets2 = document.getElementsByClassName("next");
-    // fieldsets2.addEventListener("click", function () {
-    //     var fieldset = document.querySelectorAll("fieldset");
-    //     for (var i in fieldset) {
-    //         if (fieldset[i].style.display !== none) {
-    //             fieldset[i].style.display = none;
-    //             fieldset[i].nextElementSibling.style.display = block;
-    //             return;
-    //         }
-    //     }
-    // });
+    //2.
+    document.getElementsByTagName("form")[0].addEventListener("click", function (e) {
+        if (e.target && e.target.matches(".atualNext")) {
+            prox();
+        } else if (e.target && e.target.matches(".atualPrev")) {
+            prev();
+        }
+    });
 }
 
 
-/**
- * Criar uma coleção com todas as fieldsets
- * No loop ele cria todas as vezes os botões, add as classes next e bgt (classe mestre)
+/** not: 
+ * Reconhece o primeiro botão next, coloca o fieldset (parente) como none 
+ * pega o proximo fieldset irmão do parente e coloca block.
  * 
- * No primeiro if ele ve se o elemento possui um outro fieldset na frente ou atrás (é um fieldset sem ser o primeiro ou o ultimo)
- * No segundo ele ve se ele é o primeiro (possui next) poderia ser também colocado !nextElement 
- * No ultimo ele ve se ele é o ultimo (possui prev)
+ * No if é meio confuso mas é algo como se o ultimo elemento do proximo fieldset for também um botão 
+ * que possui a classe next (para então não dar erro com o botão de previous) ele coloca .atualNext nele.
+ * Se ele possuir um botão antes (prev) ele coloca atualPrev. Se não existir mais um next (else) ele coloca 
+ * esse botao como atualPrev
+ * 
+ * No fim ele remove então as classes do botão que foi clicado.
+ */
+
+function prox() {
+    //NEXT
+    var botaoAtual = document.getElementsByClassName("atualNext")[0];
+    botaoAtual.parentElement.style.display = "none";
+    botaoAtual.parentElement.nextElementSibling.style.display = "block";
+    if (ultimoFilhoProximoPai(botaoAtual).classList.contains("next")) {
+        ultimoFilhoProximoPai(botaoAtual).previousElementSibling.classList.add("atualPrev");
+        ultimoFilhoProximoPai(botaoAtual).classList.add("atualNext");
+    } else {
+        ultimoFilhoProximoPai(botaoAtual).classList.add("atualPrev");
+    }
+    botaoAtual.parentNode.lastChild.previousElementSibling.classList.remove("atualPrev");
+    botaoAtual.classList.remove("atualNext");
+}
+
+/** not: 
+ * Reconhece o primeiro botão atualPrev, coloca o fieldset (parente) como display:none 
+ * pega o proximo fieldset irmão do parente e coloca block.
+ * 
+ * No if ele pega o pai, depois pega o ultimo elemento igual ao pai antes dele, procura o ultimo filho, pega o ultimo irmão e ve se é next ou previous
+ * a confusão maior é pra manter o atualNext e na hora que acaba os previous, mas isso é resolvido no else (que ve se ele possui um irmao pro ultimo filho).
+ * 
+ * No fim ele remove então as classes do botão que foi clicado.
+ */
+
+function prev() {
+    //PREVIOUS
+    var botaoAtual = document.getElementsByClassName("atualPrev")[0];
+    botaoAtual.parentElement.style.display = "none";
+    botaoAtual.parentElement.previousElementSibling.style.display = "block";
+    if (ultimoFilhoPreviousPai(botaoAtual).previousElementSibling.classList.contains("prev")) {
+        ultimoFilhoPreviousPai(botaoAtual).previousElementSibling.classList.add("atualPrev");
+        ultimoFilhoPreviousPai(botaoAtual).classList.add("atualNext");
+    } else {
+        ultimoFilhoPreviousPai(botaoAtual).classList.add("atualNext");
+    }
+    botaoAtual.parentNode.lastChild.previousElementSibling.classList.remove("atualPrev");
+    botaoAtual.classList.remove("atualNext");
+}
+
+
+
+/** not:
+ * Criei pra melhorar a visualização do código, as classes estavam gigantescas então achei
+ * melhor criar essas funções para facilitar a visualização
+ * @param elementoDesejado
+ * @returns o ultimo filho do irmão do pai
+ */
+
+function ultimoFilhoProximoPai(botaoAtual) {
+    return botaoAtual.parentNode.nextElementSibling.lastChild;
+}
+
+/** not:
+ * @param elementoDesejado
+ * @returns o ultimo filho do irmão anterior do pai
+ */
+
+
+function ultimoFilhoPreviousPai(botaoAtual) {
+    return botaoAtual.parentNode.previousElementSibling.lastChild;
+}
+
+
+/** not:
+ * Antes do loop: Ele então cria uma variavel pega todos os fieldsets (collection).
+ * 
+ * No loop ele vai então começar a criar os botões de previous e next para inserir nos fieldsets. Eu inseri a classe bgt para então depois
+ * criarmos o nosso css padrão da biblioteca, não usei innerHTML pois pode causar altos erros depois, por fim eu coloquei .type = "button"
+ * pois o botão dentro de uma form tem a propriedade padrão de dar refresh na pagina, causando então que tudo desmoronasse :(.
+ * 
+ * 
+ * No primeiro if ele ve se o elemento possui um outro fieldset na frente ou atrás (é um fieldset sem ser o primeiro ou o ultimo),
+ * no segundo ele ve se ele é o primeiro (possui next) poderia ser também colocado !nextElement é também inserida a classe atualnext,
+ * no ultimo ele ve se ele é o ultimo (possui prev).
+ * 
  */
 
 function criarBotoes() {
     var fieldsets = document.getElementsByTagName("fieldset");
     for (var i in fieldsets) {
         var prev = document.createElement("button");
-        prev.classList.add("next", "bgt");
-        prev.innerHTML = "voltar"
+        prev.classList.add("prev", "bgt");
+        prev.textContent = "voltar"
+        prev.type = "button";
         var next = document.createElement("button");
         next.classList.add("next", "bgt");
-        next.innerHTML = "avançar"
+        next.textContent = "avançar"
+        next.type = "button";
 
         if (fieldsets[i].previousElementSibling && fieldsets[i].nextElementSibling) {
             fieldsets[i].appendChild(prev);
             fieldsets[i].appendChild(next);
         } else if (fieldsets[i].nextElementSibling) {
+            next.classList.add("atualNext");
             fieldsets[i].appendChild(next);
         } else if (fieldsets[i].previousElementSibling) {
             fieldsets[i].appendChild(prev);
