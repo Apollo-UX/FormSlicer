@@ -5,50 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
 
-    <title>Budget.JS - Formularios multi-paginas</title>
-
-    <!-- CSS -->
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilo.css">
-
-    <!-- JS -->
-
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <!--Bootstrap 4.00 alpha 6-->
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
-
-
-    <!-- Fontes e Icons -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
-    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
-
 </head>
 
 <body>
-    <form id="form-principal">
-        <fieldset class="ativo">
-            <h2>Primeira tabela</h2>
-            <input type="text" oninput="validar(this)" id="name" placeholder="Digite seu nome..." class="form-control" required>
-            <input type="button" name="prox1" class="btn btn-info btn-ativo disabled" onclick=prox() value="avançar" id="button" />
+    <button id="btn-start">Começar processo</button>
+    <form action="">
+        <fieldset>
+            <legend>1</legend>
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
         </fieldset>
-        <fieldset class="fs">
-            <h2>Segunda tabela</h2>
-            <input type="text" oninput="validar(this)" id="name" placeholder="Digite seu nome..." class="form-control" required>
-            <input type="button" name="prox1" class="btn btn-info" onclick=prox() value="avançar" id="button" />
+        <fieldset>
+            <legend>2</legend>
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
         </fieldset>
-        <fieldset class="fs">
-            <h2>Terceira tabela</h2>
-            <input type="text" oninput="validar()" id="name" placeholder="Digite seu nome..." class="form-control" required>
-            <input type="button" name="prox1" class="btn btn-info" onclick=prox() value="avançar" id="button" />
+        <fieldset>
+            <legend>3</legend>
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
         </fieldset>
-        <fieldset class="fs">
-            <h2>Quarta tabela</h2>
-            <input type="password">
-            <input type="text">
-            <input type="submit" name="prox2" onclick=prox() class="button" value="avançar" />
+        <fieldset>
+            <legend>4</legend>
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
         </fieldset>
     </form>
 </body>
