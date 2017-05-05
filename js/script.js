@@ -32,6 +32,7 @@ function main() {
             prev();
         }
     });
+    document.getElementById("btn-start").addEventListener("click", escondeBtn); 
 }
 
 /**not:
@@ -182,6 +183,11 @@ function criarBotoes() {
             fieldsets[i].appendChild(prev);
         }
     }
+}
+
+function escondeBtn(){
+    var btn = document.getElementById("btn-start");
+    btn.style.display = "none";
 }
 
 
