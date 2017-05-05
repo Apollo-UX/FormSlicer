@@ -26,11 +26,47 @@ function main() {
     //2.
     document.getElementsByTagName("form")[0].addEventListener("click", function (e) {
         if (e.target && e.target.matches(".atualNext")) {
+            validar();
             prox();
         } else if (e.target && e.target.matches(".atualPrev")) {
             prev();
         }
     });
+}
+
+/**not:
+ * Vi que o plugin jqueryvalidate usava de regras de regex para validar, então tive a ideia
+ * de usar essas regras dentro de objetos para o mesmo.
+ * 
+ * A regra de email peguei do proprio mozilla, ele pede aquele basico de xxxxxxxx@xxxxxxx.xxx
+ * 
+ * Na função ele está pegando o botão atualNext para saber qual fieldset está ativo no momento,
+ * após isso ele cria um objeto com todos os inputs que estão nesse mesmo fieldset, usa o slice
+ * para criar uma array e faz um forEach para testar todos os inputs com suas devidas regras.
+ * No momento só coloquei de texto.
+ * 
+ */
+
+function validar() {
+    //Regras tiradas da página do mozilla sobre regex
+    var regras = {
+        email : /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        num : /^[0-9]*$/,
+        texto : /[a-zA-Z]/
+    }
+
+    var x = document.querySelector(".atualNext");
+    console.log(x);
+    var inputs = x.parentNode.getElementsByTagName("input");
+    console.log(inputs);
+    inputsArr = Array.prototype.slice.call(inputs);
+    inputsArr.forEach(function (x) {
+        if (!regras.email.test(x.value)) {
+            x.placeholder = "erro";
+            x.focus();
+            return false;
+        }
+    })
 }
 
 
@@ -147,7 +183,6 @@ function criarBotoes() {
         }
     }
 }
-
 
 
 /** Prepara função ao ativar tela */
