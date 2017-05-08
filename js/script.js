@@ -26,7 +26,6 @@ function main() {
     //2.
     document.getElementsByTagName("form")[0].addEventListener("click", function (e) {
         if (e.target && e.target.matches(".atualNext")) {
-            validar();
             prox();
         } else if (e.target && e.target.matches(".atualPrev")) {
             prev();
@@ -48,27 +47,31 @@ function main() {
  * 
  */
 
-function validar() {
-    //Regras tiradas da página do mozilla sobre regex
-    var regras = {
-        email : /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        num : /^[0-9]*$/,
-        texto : /[a-zA-Z]/
-    }
 
-    var x = document.querySelector(".atualNext");
-    console.log(x);
-    var inputs = x.parentNode.getElementsByTagName("input");
-    console.log(inputs);
-    inputsArr = Array.prototype.slice.call(inputs);
+function validar() {
+    // Regras tiradas da página do mozilla sobre regex
+    var regrasREGEX = {
+        email: /[^\s]*@[a-z0-9.-]*/i,
+        num: /^[0-9]*$/,
+        texto: /[a-zA-Z]/,
+        nome: /[a-zA-Z]{5,15}/,
+    };
+
+    let contador = 0;
+    var botaoAtual = document.querySelector('.atualNext');
+    var inputs = botaoAtual.parentNode.getElementsByTagName('input');
+    var inputsArr = Array.from(inputs);
     inputsArr.forEach(function (x) {
-        if (!regras.email.test(x.value)) {
-            x.placeholder = "erro";
-            x.focus();
-            return false;
+        if (!regrasREGEX.texto.test(x.value)) {
+            x.placeholder = 'erro';
+            contador++;
         }
-    })
+    });
+
+    // contador == 0 significa que não foi encontrado erros (return true)
+    return contador === 0;
 }
+
 
 
 /** not: 
@@ -86,6 +89,9 @@ function validar() {
 function prox() {
     //NEXT
     var botaoAtual = document.getElementsByClassName("atualNext")[0];
+    if(!validar()){
+        return;
+    }
     botaoAtual.parentElement.style.display = "none";
     botaoAtual.parentElement.nextElementSibling.style.display = "block";
     if (ultimoFilhoProximoPai(botaoAtual).classList.contains("next")) {
