@@ -163,14 +163,14 @@ function criarBotoes() {
 }
 function pegaFs(v){
     v.forEach(function(x){
-       var prev = document.createElement("button")
-           .classList.add("prev", "bgt")
-           .textContent = "voltar"
-           .type = "button";
-       var next = document.createElement("button")
-           .classList.add("next", "bgt")
-           .textContent = "avançar"
-           .type = "button";
+        var prev = document.createElement("button");
+        prev.classList.add("prev", "bgt");
+        prev.textContent = "voltar";
+        prev.type = "button";
+        var next = document.createElement("button");
+        next.classList.add("next", "bgt");
+        next.textContent = "avançar";
+        next.type = "button";
        
        if (x.previousElementSibling && x.nextElementSibling) {
             x.appendChild(prev);
