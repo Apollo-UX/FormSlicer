@@ -169,28 +169,31 @@ function ultimoFilhoPreviousPai(botaoAtual) {
 
 function criarBotoes() {
     var fieldsets = document.getElementsByTagName("fieldset");
-    for (var i in fieldsets) {
-        var prev = document.createElement("button");
-        prev.classList.add("prev", "bgt");
-        prev.textContent = "voltar"
-        prev.type = "button";
-        var next = document.createElement("button");
-        next.classList.add("next", "bgt");
-        next.textContent = "avançar"
-        next.type = "button";
-
-        if (fieldsets[i].previousElementSibling && fieldsets[i].nextElementSibling) {
-            fieldsets[i].appendChild(prev);
-            fieldsets[i].appendChild(next);
-        } else if (fieldsets[i].nextElementSibling) {
-            next.classList.add("atualNext");
-            fieldsets[i].appendChild(next);
-        } else if (fieldsets[i].previousElementSibling) {
-            fieldsets[i].appendChild(prev);
-        }
-    }
+    var fieldsetArr = Array.prototype.slice.call(fieldsets);
+    pegaFs(fieldsetArr);
 }
-
+function pegaFs(v){
+    v.forEach(function(x){
+       var prev = document.createElement("button");
+       prev.classList.add("prev", "bgt");
+       prev.textContent = "voltar"
+       prev.type = "button";
+       var next = document.createElement("button");
+       next.classList.add("next", "bgt");
+       next.textContent = "avançar"
+       next.type = "button";
+       
+       if (x.previousElementSibling && x.nextElementSibling) {
+            x.appendChild(prev);
+            x.appendChild(next);
+        } else if (x.nextElementSibling) {
+            next.classList.add("atualNext");
+            x.appendChild(next);
+        } else if (x.previousElementSibling) {
+            x.appendChild(prev);
+        }
+       });
+}
 function escondeBtn(){
     var btn = document.getElementById("btn-start");
     btn.style.display = "none";
