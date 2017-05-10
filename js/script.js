@@ -45,8 +45,8 @@ function main() {
 function validar() {
     // Regras tiradas da página do mozilla sobre regex
     var regrasREGEX = {
-        email: /[^\s]*8a-z0-9.-]*/i,
-        num: /^[0-9]*$/,
+        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        num: /[0-9]/,
         texto: /[a-zA-Z]/,
         nome: /[a-zA-Z]{5,15}/,
     };
@@ -55,27 +55,30 @@ function validar() {
     var botaoAtual = document.querySelector('.atualNext');
     var inputs = botaoAtual.parentNode.getElementsByTagName('input');
     var inputsArr = Array.from(inputs);
-     inputsArr.forEach(function (x) {
+      inputsArr.forEach(function (x) {
         if(x.type == "text"){
             if (!regrasREGEX.texto.test(x.value)) {
-                x.placeholder = 'erro';
-                
+                x.placeholder = 'Campo inválido';
+                var msg = 'Erro: Campo inválido';
+                addErro(x,msg); // Chama função que cria span e passa a msg
                 contador++;
             }
         } 
 
         else if(x.type == "number"){
             if (!regrasREGEX.num.test(x.value)) {
-                x.placeholder = 'erro só pode conter números';
-                
+                x.placeholder = 'Campo inválido';
+                var msg = 'Erro: Deve conter apenas números ou está vazio.';
+                addErro(x,msg);
                 contador++;
             }
         } 
 
         else if(x.type == "email"){
             if (!regrasREGEX.email.test(x.value)) {
-                x.placeholder = 'erro no email';
-                
+                x.placeholder = 'Email inválido';
+                var msg = 'Erro: Email não atende aos padrões.';
+                addErro(x,msg); // Chama função que cria span e passa a msg
                 contador++;
             } else {
 
@@ -84,8 +87,9 @@ function validar() {
 
          else if(x.type == "password"){
             if (!regrasREGEX.nome.test(x.value)) {
-                x.placeholder = 'erro na senha(?)';
-                //Pensar sobre isso tbm
+                x.placeholder = 'Erro na senha(?)';//Pensar sobre isso tbm
+                var msg = 'Campo inválido';
+                addErro(x,msg);
                 contador++;
             } else {
 
@@ -98,6 +102,23 @@ function validar() {
 
     // contador == 0 significa que não foi encontrado erros (return true)
     return contador === 0;
+}
+
+
+// Função que criar um span com mensagem de erro depois do input
+// Ele pede o input que está com o erro e criar um span com a msg que vc passa no if lá em cima
+function addErro(x, msg){
+    var span = document.createElement('span');
+    var texterro = document.createTextNode(msg);
+    span.appendChild(texterro);
+    span.style.color = "red";
+    insertAfter(x, span);
+    
+}
+
+// Função para inserir elemento ápos o anterior
+function insertAfter(onde, add) {
+    onde.parentNode.insertBefore(add, onde.nextSibling);
 }
 
 // Função que verifica os tipos dos inputs no form
