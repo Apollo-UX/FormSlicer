@@ -55,11 +55,45 @@ function validar() {
     var botaoAtual = document.querySelector('.atualNext');
     var inputs = botaoAtual.parentNode.getElementsByTagName('input');
     var inputsArr = Array.from(inputs);
-    inputsArr.forEach(function (x) {
-        if (!regrasREGEX.texto.test(x.value)) {
-            x.placeholder = 'erro';
-            contador++;
-        }
+     inputsArr.forEach(function (x) {
+        if(x.type == "text"){
+            if (!regrasREGEX.texto.test(x.value)) {
+                x.placeholder = 'erro';
+                
+                contador++;
+            }
+        } 
+
+        else if(x.type == "number"){
+            if (!regrasREGEX.num.test(x.value)) {
+                x.placeholder = 'erro só pode conter números';
+                
+                contador++;
+            }
+        } 
+
+        else if(x.type == "email"){
+            if (!regrasREGEX.email.test(x.value)) {
+                x.placeholder = 'erro no email';
+                
+                contador++;
+            } else {
+
+            }
+        } 
+
+         else if(x.type == "password"){
+            if (!regrasREGEX.nome.test(x.value)) {
+                x.placeholder = 'erro na senha(?)';
+                //Pensar sobre isso tbm
+                contador++;
+            } else {
+
+            }
+        } 
+
+        else {}
+
     });
 
     // contador == 0 significa que não foi encontrado erros (return true)
