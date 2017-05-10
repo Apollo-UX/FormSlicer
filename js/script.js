@@ -66,7 +66,17 @@ function validar() {
     return contador === 0;
 }
 
-
+// Função que verifica os tipos dos inputs no form
+// Estou colocando ela no código principal, assim que terminar, tiro o comentário
+/* 
+    document.querySelector('#ativa').addEventListener("click", function(e){ // Seleciona e adiciona Evento
+        var a = document.getElementsByTagName("form")[0]; // Seleciona Form
+        var inputArr = Array.from(a); // Array do obj 
+            inputArr.forEach(function (x) { 
+                alert(x.type); // Exibe o tipo dele no alerta
+            });
+    });
+*/
 
 /** not: 
  * Reconhece o primeiro botão next, coloca o fieldset (parente) como none 
