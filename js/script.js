@@ -8,9 +8,9 @@ function main() {
     //1.
 
     (function mostrar() {
-        var fslicer = document.querySelectorAll('.fslicer');
+        var fslicer = document.querySelectorAll('#fslicer');
         if (fslicer.length > 0) {
-            var fieldsets = document.querySelectorAll("fieldset:not(:first-of-type)");
+            var fieldsets = document.querySelectorAll("#fslicer fieldset:not(:first-of-type)");
             var fieldsetsArr = Array.prototype.slice.call(fieldsets);
             fieldsetsArr
                 .forEach(function (x) {
@@ -22,7 +22,7 @@ function main() {
 
     document.getElementById("btn-start").addEventListener("click", function () {
         // escolhe todos que não sejam o primeiro do tipo
-        var fieldsets = document.querySelectorAll("fieldset:not(:first-of-type)");
+        var fieldsets = document.querySelectorAll(".fslicer fieldset:not(:first-of-type)");
         var fieldsetsArr = Array.prototype.slice.call(fieldsets);
         fieldsetsArr
             .forEach(function (x) {
@@ -239,7 +239,7 @@ function ultimoFilhoPreviousPai(botaoAtual) {
  */
 
 function criarBotoes() {
-    var fieldsets = document.getElementsByTagName("fieldset");
+    var fieldsets = document.querySelectorAll("#fslicer fieldset");
     var fieldsetArr = Array.prototype.slice.call(fieldsets);
     pegaFs(fieldsetArr);
 }
