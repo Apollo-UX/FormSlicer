@@ -6,6 +6,20 @@
 
 function main() {
     //1.
+
+    (function mostrar() {
+        var fslicer = document.querySelectorAll('.fslicer');
+        if (fslicer.length > 0) {
+            var fieldsets = document.querySelectorAll("fieldset:not(:first-of-type)");
+            var fieldsetsArr = Array.prototype.slice.call(fieldsets);
+            fieldsetsArr
+                .forEach(function (x) {
+                    x.style.display = "none";
+                })
+            criarBotoes();
+        }
+    })()
+
     document.getElementById("btn-start").addEventListener("click", function () {
         // escolhe todos que não sejam o primeiro do tipo
         var fieldsets = document.querySelectorAll("fieldset:not(:first-of-type)");
@@ -25,7 +39,7 @@ function main() {
             prev();
         }
     });
-    document.getElementById("btn-start").addEventListener("click", escondeBtn); 
+    document.getElementById("btn-start").addEventListener("click", escondeBtn);
 }
 
 /**not:
@@ -50,53 +64,45 @@ function validar() {
         texto: /[a-zA-Z]/,
         nome: /[a-zA-Z]{5,15}/,
     };
-
     let contador = 0;
     var botaoAtual = document.querySelector('.atualNext');
     var inputs = botaoAtual.parentNode.getElementsByTagName('input');
     var inputsArr = Array.from(inputs);
-      inputsArr.forEach(function (x) {
-        if(x.type == "text"){
+    limparErros();
+    inputsArr.forEach(function (x) {
+        if (x.type === "text") {
             if (!regrasREGEX.texto.test(x.value)) {
                 x.placeholder = 'Campo inválido';
-                var msg = 'Erro: Campo inválido';
-                addErro(x,msg); // Chama função que cria span e passa a msg
+                var msg = ' Campo inválido';
+                addErro(x, msg); // Chama função que cria span e passa a msg
                 contador++;
             }
-        } 
-
-        else if(x.type == "number"){
+        } else if (x.type == "number") {
             if (!regrasREGEX.num.test(x.value)) {
                 x.placeholder = 'Campo inválido';
-                var msg = 'Erro: Deve conter apenas números ou está vazio.';
-                addErro(x,msg);
+                var msg = ' Deve conter apenas números ou está vazio.';
+                addErro(x, msg);
                 contador++;
             }
-        } 
-
-        else if(x.type == "email"){
+        } else if (x.type == "email") {
             if (!regrasREGEX.email.test(x.value)) {
                 x.placeholder = 'Email inválido';
-                var msg = 'Erro: Email não atende aos padrões.';
-                addErro(x,msg); // Chama função que cria span e passa a msg
+                var msg = ' Email não atende aos padrões.';
+                addErro(x, msg); // Chama função que cria span e passa a msg
                 contador++;
             } else {
 
             }
-        } 
-
-         else if(x.type == "password"){
+        } else if (x.type == "password") {
             if (!regrasREGEX.nome.test(x.value)) {
-                x.placeholder = 'Erro na senha(?)';//Pensar sobre isso tbm
+                x.placeholder = 'Erro na senha(?)'; //Pensar sobre isso tbm
                 var msg = 'Campo inválido';
-                addErro(x,msg);
+                addErro(x, msg);
                 contador++;
             } else {
 
             }
-        } 
-
-        else {}
+        } else {}
 
     });
 
@@ -104,16 +110,27 @@ function validar() {
     return contador === 0;
 }
 
-
+// FERNANDO
 // Função que criar um span com mensagem de erro depois do input
 // Ele pede o input que está com o erro e criar um span com a msg que vc passa no if lá em cima
-function addErro(x, msg){
-    var span = document.createElement('span');
-    var texterro = document.createTextNode(msg);
-    span.appendChild(texterro);
-    span.style.color = "red";
-    insertAfter(x, span);
-    
+function addErro(x, msg) {
+    // Cria erro
+    var erro = document.createElement('span');
+    var textErro = document.createTextNode(msg);
+    erro.appendChild(textErro);
+    erro.classList.add('fsErro');
+    insertAfter(x, erro);
+    x.style.border = '1px solid red';
+}
+
+function limparErros() {
+    // Pega todos os erros e deleta
+    var ps = Array.from(document.querySelectorAll('.fsErro'));
+    ps.forEach(function (x) {
+        if (ps.length > 0) {
+            x.parentNode.removeChild(x);
+        }
+    });
 }
 
 // Função para inserir elemento ápos o anterior
@@ -148,7 +165,7 @@ function prox() {
     // NEXT
     var botaoAtual = document.getElementsByClassName("atualNext")[0];
     // Usa a função validar para conferir os inputs e liberar o botão
-    if(!validar()){
+    if (!validar()) {
         return;
     }
     botaoAtual.parentElement.style.display = "none";
@@ -226,8 +243,9 @@ function criarBotoes() {
     var fieldsetArr = Array.prototype.slice.call(fieldsets);
     pegaFs(fieldsetArr);
 }
-function pegaFs(v){
-    v.forEach(function(x){
+
+function pegaFs(v) {
+    v.forEach(function (x) {
         var prev = document.createElement("button");
         prev.classList.add("prev", "bgt");
         prev.textContent = "voltar";
@@ -236,8 +254,8 @@ function pegaFs(v){
         next.classList.add("next", "bgt");
         next.textContent = "avançar";
         next.type = "button";
-       
-       if (x.previousElementSibling && x.nextElementSibling) {
+
+        if (x.previousElementSibling && x.nextElementSibling) {
             x.appendChild(prev);
             x.appendChild(next);
         } else if (x.nextElementSibling) {
@@ -246,9 +264,10 @@ function pegaFs(v){
         } else if (x.previousElementSibling) {
             x.appendChild(prev);
         }
-       });
+    });
 }
-function escondeBtn(){
+
+function escondeBtn() {
     var btn = document.getElementById("btn-start");
     btn.style.display = "none";
 }
