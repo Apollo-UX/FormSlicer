@@ -18,7 +18,7 @@ function main() {
                 })
             criarBotoes();
         }
-    })()
+    })();
 
     document.getElementById("btn-start").addEventListener("click", function () {
         // escolhe todos que não sejam o primeiro do tipo
@@ -33,13 +33,19 @@ function main() {
 
     //2.
     document.getElementsByTagName("form")[0].addEventListener("click", function (e) {
+        var form = document.getElementsByTagName('form')[0];
         if (e.target && e.target.matches(".atualNext")) {
-            prox();
+            // Confere se o usuario pediu validação
+            if (form.classList.contains('fs-validate')) {
+                prox('x');
+            } else {
+                prox();
+            }
         } else if (e.target && e.target.matches(".atualPrev")) {
             prev();
         }
     });
-    document.getElementById("btn-start").addEventListener("click", escondeBtn);
+    document.getElementById("btn-start").addEventListener("click", escondeBtn());
 }
 
 /**not:
@@ -58,7 +64,7 @@ function main() {
 
 function validar() {
     // Regras tiradas da página do mozilla sobre regex
-    var regrasREGEX = {
+    const regrasREGEX = {
         email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         num: /[0-9]/,
         texto: /[a-zA-Z]/,
@@ -110,7 +116,7 @@ function validar() {
     return contador === 0;
 }
 
-// FERNANDO
+// Fernando
 // Função que criar um span com mensagem de erro depois do input
 // Ele pede o input que está com o erro e criar um span com a msg que vc passa no if lá em cima
 function addErro(x, msg) {
@@ -161,12 +167,15 @@ function insertAfter(onde, add) {
  * 
  */
 
-function prox() {
+function prox(validate) {
     // NEXT
     var botaoAtual = document.getElementsByClassName("atualNext")[0];
+
     // Usa a função validar para conferir os inputs e liberar o botão
-    if (!validar()) {
-        return;
+    if (validate !== undefined) {
+        if (!validar()) {
+            return;
+        }
     }
     botaoAtual.parentElement.style.display = "none";
     botaoAtual.parentElement.nextElementSibling.style.display = "block";
