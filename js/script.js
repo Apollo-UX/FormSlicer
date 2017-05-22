@@ -279,7 +279,7 @@ function escondeBtn() {
 
 function validateRadio (radios)
 {
-    alert("nice!");
+    alert("noificaçao da funçao de radio buttons!");
     for (i = 0; i < radios.length; ++ i)
     {
         if (radios [i].checked) return true;
