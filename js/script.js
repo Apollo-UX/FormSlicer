@@ -44,6 +44,8 @@ function main() {
         }
     });
     document.getElementById('btn-start').addEventListener('click', escondeBtn());
+    validateRadio();
+    validateForm();
 }
 
 /**not:
@@ -275,6 +277,28 @@ function escondeBtn() {
     btn.style.display = 'none';
 }
 
+function validateRadio (radios)
+{
+    alert("nice!");
+    for (i = 0; i < radios.length; ++ i)
+    {
+        if (radios [i].checked) return true;
+        alert("Concluido!");
+    }
+    return false;
+}
 
+function validateForm()
+{
+    if(validateRadio (document.forms["form"]["q1"]))
+    {
+        return true;
+    }
+    else
+    {
+        alert('responda tudo antes de finalizar!');
+        return false;
+    }
+}
 /** Prepara função ao ativar tela */
 window.onload = main;
