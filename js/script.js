@@ -17,6 +17,7 @@ function main() {
                     x.style.display = 'none';
                 });
             criarBotoes();
+            mudaCorBtns();
         }
     })();
 
@@ -143,6 +144,74 @@ function limparErros() {
 function insertAfter(onde, add) {
     onde.parentNode.insertBefore(add, onde.nextSibling);
 }
+
+
+// Função para mudar a cor dos botões, caso o usuário queira
+// Deixei 4 cores pre definidas: Padrão, Sucesso, Aviso, Erro
+function mudaCorBtns() {
+  var div = document.querySelectorAll('form');
+  var divArr = Array.from(div);
+    divArr.forEach(x => {
+    if(x.classList.contains('fs-padrao')){
+      var cls = ".fs-padrao button";
+      var cor = "#888";
+      mudaCorBtn(cls,cor);  
+    } 
+    if(x.classList.contains('fs-sucesso')){
+      var cls = ".fs-sucesso button";
+      var cor = "#2ecc71";
+      mudaCorBtn(cls,cor);  
+    }
+    if(x.classList.contains('fs-aviso')){
+      var cls = ".fs-aviso button";
+      var cor = "#f1c40f";
+      mudaCorBtn(cls,cor);  
+    }
+    if(x.classList.contains('fs-erro')){
+      var cls = ".fs-erro button";
+      var cor = "#e74c3c";
+      mudaCorBtn(cls,cor);  
+    }
+  })
+  
+}
+
+function mudaCorBtn(cls,cor) {
+  var btns = document.querySelectorAll(cls);
+  var btnsArr = Array.from(btns);
+    btnsArr.forEach(x => {
+      var cor1 = cor;
+      var cor2 = "#fff";
+      var cor3 = "transparent";
+      mudaCor(x, cor1, cor2, cor3);
+   });
+}
+
+function mudaCor(x,cor1,cor2,cor3){
+    x.style.backgroundColor = cor1;        
+    x.style.border = "1px solid "+cor3;
+    x.style.color = cor2;    
+    x.style.padding = "10px";
+    x.style.transition = ".5s";
+
+    x.onmouseover = function() 
+    {
+      this.style.backgroundColor = cor2;        
+      this.style.border = "1px solid "+cor1;
+      this.style.color = cor1;    
+      this.style.padding = "10px";
+      this.style.boxShadow = "0 5px 10px #eee";
+
+    }
+    x.onmouseout = function() 
+    {
+      this.style.backgroundColor = cor1;        
+      this.style.borderColor = cor3;
+      this.style.color = cor2;    
+      this.style.padding = "10px";
+      this.style.boxShadow = "0 5px 10px "+cor3;
+    }
+ };
 
 // Função que verifica os tipos dos inputs no form
 // Estou colocando ela no código principal, assim que terminar, tiro o comentário
