@@ -45,8 +45,6 @@ function main() {
         }
     });
     document.getElementById('btn-start').addEventListener('click', escondeBtn());
-    validateRadio();
-    validateForm();
 }
 
 /**not:
@@ -238,8 +236,7 @@ function mudaCor(x,cor1,cor2,cor3){
 
 function prox(validate) {
     // NEXT
-    var botaoAtual = document.getElementsByClassName('atualNext')[0];
-
+    
     // Usa a função validar para conferir os inputs e liberar o botão
     if (validate !== undefined) {
         if (!validar()) {
@@ -344,30 +341,6 @@ function criarBotoes() {
 function escondeBtn() {
     var btn = document.getElementById('btn-start');
     btn.style.display = 'none';
-}
-
-function validateRadio (radios)
-{
-    alert("noificaçao da funçao de radio buttons!");
-    for (i = 0; i < radios.length; ++ i)
-    {
-        if (radios [i].checked) return true;
-        alert("Concluido!");
-    }
-    return false;
-}
-
-function validateForm()
-{
-    if(validateRadio (document.forms["form"]["q1"]))
-    {
-        return true;
-    }
-    else
-    {
-        alert('responda tudo antes de finalizar!');
-        return false;
-    }
 }
 /** Prepara função ao ativar tela */
 window.onload = main;
