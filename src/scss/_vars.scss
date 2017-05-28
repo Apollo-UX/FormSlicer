@@ -1,0 +1,8 @@
+// Variáveis 
+$cor-0 : #f9f9f9;
+$cor-1 : #333;
+$cor-2 : #f8d473;
+$cor-3 : #eee;
+
+::-moz-selection { background: $cor-2; color: $cor-1 }
+::selection { background: $cor-2; color: $cor-1 }
