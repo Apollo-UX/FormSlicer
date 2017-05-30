@@ -127,7 +127,7 @@ main {
 			}
 		}
 	}
-	#sobre, #form-teste {
+	#sobre, #form-teste, #validacao {
 		min-height: 40vh;
 		height: auto;
 		padding-top: 50px;
@@ -161,13 +161,17 @@ main {
 				color: $cor-2;
 			}
 			input {
+				width: 100%;
 			    height: 30px;
 			    border: none;
 			    padding: 10px;
 			    outline: none;
 			    margin-bottom: 20px;
 			    margin-top: 20px;
-			    box-shadow: 0 2px 4px #e6e6e6;
+			    &:focus {
+			   		box-shadow: 0 2px 4px #e6e6e6;
+
+			    }
 			}
 			label {
 				text-align: center;
@@ -181,6 +185,11 @@ main {
 	}
 }
 
+footer {
+	background: $cor-2;
+	padding: 20px;
+	text-align: center;
+}
 
 // Icon Github
 .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}

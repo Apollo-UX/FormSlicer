@@ -122,7 +122,7 @@
 							<h4>Sem o FormSlicer</h4>
 							<form action="" class="">
 					        <fieldset>
-					            <legend><span class="span--amarelo">1</span> de 3</legend>
+					            <legend><span class="span--amarelo">0</span> de 0</legend>
 					            <label name="nome1">Qual o seu <span class="span--amarelo">nome?</span></label>
 					            <br>
 					            <input type="text" name="nome" id="nome1" placeholder="Digite seu nome..." required />
@@ -133,20 +133,72 @@
 					            <br>
 					            <label name="email1">Qual o seu <span class="span--amarelo">email?</span></label>
 					            <br>
-					            <input type="email" required />
-					            <br>
+					            <input type="email" placeholder="exemplo@exemplo.com" required />
 					        </fieldset>
 					    </form>
 						</div>
 					</div>
 			   	</div>
+			   	<div class="row center-xs">
+			   		<div class="col-xs-12 col-md-8">
+						<h2>Opções de Botão</h2>
+						<p class="sobre--descricao">O <b>FormSlicer</b> conta com três botões padrões para utilização no formuçário. São eles:</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form action="" class="fs-slicer fs-padrao">
+					        <fieldset>
+					            <label name="nome1">Botão de padrão</label>
+					        	<pre><code class="language-javascript" data-lang="javascript">var formSlicer = require("form-slicer");</code></pre>
+					            <br>
+					            <button>Botão Padrão</button>
+					    	</fieldset>
+					   	</form>
+					    <form action="" class="fs-slicer fs-sucesso">
+					        <fieldset>
+					            <label name="nome1">Botão de sucesso</label>
+					        	<pre><code class="language-javascript" data-lang="javascript">var formSlicer = require("form-slicer");</code></pre>
+					            <br>
+					            <button>Botão Sucesso</button>
+					    	</fieldset>
+					   	</form>
+					</div>
+					<div class="col-md-6">
+					   	<form action="" class="fs-slicer fs-aviso">
+					        <fieldset>
+					            <label name="nome1">Botão de aviso</label>
+					        	<pre><code data-lang="css"><span class="nt">&lt;form action="" class="fs-slicer fs-aviso"></span></code></pre>
+					            <br>
+					            <button>Botão Aviso</button>
+					    	</fieldset>
+					   	</form>
+					   	<form action="" class="fs-slicer fs-erro">
+					        <fieldset>
+					            <label name="nome1">Botão de erro</label>
+					        	<pre><code class="language-javascript" data-lang="javascript">var formSlicer = require("form-slicer");</code></pre>
+					            <br>
+					            <button>Botão Erro</button>
+					    	</fieldset>
+					   	</form>
+				   	</div>
+		   		</div>
+		   		</div>
 		   	</div>
 		</section>
-		<section></section>
-		<section></section>
+		<section id="validacao">
+			<div class="container">
+				<div class="row center-xs">
+			   		<div class="col-xs-12 col-md-8">
+						<h2>Ativando a validação</h2>
+						<p class="sobre--descricao">Você também pode utilizar a validação dos campos disponível pelo <b>FormSlicer</b></p>
+						<pre><code data-lang="css"><span class="nt">&lt;form name="form" action="" id="fslicer" class="<b>fs-validate</b> fs-slicer"></span></code></pre>
+					</div>
+				</div>
+			</div>
+		</section>
 	</main>
-	<aside></aside>
-	<footer></footer>
+	<footer class="container-fluid">Feito por <b>Fernando, Gabriel e Leonardo - 2017</b></footer>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet">
