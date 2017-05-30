@@ -89,12 +89,14 @@
 				<div class="row center-xs">
 				    <div class="col-xs-12 col-md-8">
 						<h2>Por que tão maravilhoso?</h2>
-						<p class="sobre--descricao">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, voluptates! <br> Consectetur adipisicing elit. Vero, voluptates!</p>
+						<p class="sobre--descricao">Com o formSlicer você pode transformar formulários enormes em multiplas etapas, somente com a utilização de um id! 
+						Além disso você pode escolher entre cores e validação utilizando javascript puro, sem também necessitar de um arquivo css adicional.
+						</p>
 						<div class="row center-md">
 							<div class="col-md-6">
 								<h4>Com o FormSlicer</h4>
    								<button id="btn-start">Começar processo</button>
-    							<form name="form" action="" id="fslicer" class="fs-validate fs-slicer fs-aviso">
+    						<form name="form" action="" id="fslicer" class="fs-slicer fs-aviso fs-apresent fs-validate">
 						        <fieldset>
 						            <legend><span class="span--amarelo">1</span> de 3</legend>
 						            <label name="nome2">Qual o seu <span class="span--amarelo">nome?</span></label>
@@ -117,12 +119,15 @@
 						            <br>
 						        </fieldset>
 						    </form>
+							<input type="button" class="apresentValidar" style="background: none; border: 1px solid #DDD; color: #888; height: 40px; width: 100px; cursor: pointer;margin-left: 15px"value="Validar"> 
+							<input type="button" class="apresentNValidar" style="background: none; border: 1px solid #DDD; color: #888; height: 40px; width: 100px; cursor: pointer;margin-left: 15px"value="Não Validar"> 
 						</div>
 						<div class="col-md-6">
 							<h4>Sem o FormSlicer</h4>
+							<br>
 							<form action="" class="">
 					        <fieldset>
-					            <legend><span class="span--amarelo">0</span> de 0</legend>
+								<br>
 					            <label name="nome1">Qual o seu <span class="span--amarelo">nome?</span></label>
 					            <br>
 					            <input type="text" name="nome" id="nome1" placeholder="Digite seu nome..." required />
@@ -152,7 +157,7 @@
 						<form action="" class="fs-slicer fs-padrao">
 					        <fieldset>
 					            <label name="nome1">Botão de padrão</label>
-					        	<pre><code class="language-javascript" data-lang="javascript">var formSlicer = require("form-slicer");</code></pre>
+					        	<pre><code class="language-javascript" data-lang="javascript"><span class="nt">&lt;form action="" class="fs-slicer fs-padrao"></span></code></pre>
 					            <br>
 					            <button>Botão Padrão</button>
 					    	</fieldset>
@@ -160,7 +165,7 @@
 					    <form action="" class="fs-slicer fs-sucesso">
 					        <fieldset>
 					            <label name="nome1">Botão de sucesso</label>
-					        	<pre><code class="language-javascript" data-lang="javascript">var formSlicer = require("form-slicer");</code></pre>
+					        	<pre><code class="language-javascript" data-lang="javascript"><span class="nt">&lt;form action="" class="fs-slicer fs-sucesso"></span></code></pre>
 					            <br>
 					            <button>Botão Sucesso</button>
 					    	</fieldset>
@@ -178,7 +183,7 @@
 					   	<form action="" class="fs-slicer fs-erro">
 					        <fieldset>
 					            <label name="nome1">Botão de erro</label>
-					        	<pre><code class="language-javascript" data-lang="javascript">var formSlicer = require("form-slicer");</code></pre>
+					        	<pre><code class="language-javascript" data-lang="javascript"><span class="nt">&lt;form action="" class="fs-slicer fs-erro"></span></code></pre>
 					            <br>
 					            <button>Botão Erro</button>
 					    	</fieldset>
@@ -195,6 +200,42 @@
 						<h2>Ativando a validação</h2>
 						<p class="sobre--descricao">Você também pode utilizar a validação dos campos disponível pelo <b>FormSlicer</b></p>
 						<pre><code data-lang="css"><span class="nt">&lt;form name="form" action="" id="fslicer" class="<b>fs-validate</b> fs-slicer"></span></code></pre>
+						<p class="sobre--descricao">A validação ocorre sem plugin Jquery e contém atualmente validação de Texto, Número e Email</b></p>
+						<pre><code data-lang="javascript" style="text-align: left">function validar() {
+    'use strict';
+    const regrasREGEX = {
+        email: /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)...
+        num: /[0-9]/,
+        texto: /[a-zA-Z]/,
+        nome: /[a-zA-Z]{5,15}/,
+    };
+    let contador = 0;
+    var botaoAtual = document.querySelector('.atualNext');
+    var inputs = botaoAtual.parentNode.getElementsByTagName('input');
+    var inputsArr = Array.from(inputs);
+    limparErros();
+    inputsArr.forEach(x => {
+        if (x.type === 'text') {
+            if (!regrasREGEX.texto.test(x.value)) {
+                x.placeholder = 'Campo inválido';..
+            }
+        } else if (x.type === 'number') {
+            if (!regrasREGEX.num.test(x.value)) {
+                x.placeholder = 'Campo inválido';..
+            }
+        } else if (x.type === 'email') {
+            if (!regrasREGEX.email.test(x.value)) {
+                x.placeholder = 'Email inválido';..
+            } else {
+
+            }
+        } else if (x.type === 'password') {
+            if (!regrasREGEX.nome.test(x.value)) {
+                x.placeholder = 'Erro na senha';..
+            }
+        }
+    });
+</code></pre>
 					</div>
 				</div>
 			</div>

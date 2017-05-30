@@ -1,51 +1,57 @@
 /** not:
- * 
- * Esconde todos os fieldsets que não sejam o primeiro,
- * Eventlistener para o next e previous.
+ * Criei pra melhorar a visualização do código, as classes estavam gigantescas então achei
+ * melhor criar essas funções para facilitar a visualização
+ * @param elementoDesejado
+ * @returns o ultimo filho do irmão do pai
  */
 
-function main() {
-    //1.
-
-    (function mostrar() {
-        var fslicer = document.querySelectorAll('#fslicer');
-        if (fslicer.length > 0) {
-            var fieldsets = document.querySelectorAll('#fslicer fieldset:not(:first-of-type)');
-            var fieldsetsArr = Array.prototype.slice.call(fieldsets);
-            fieldsetsArr
-                .forEach(x => {
-                    x.style.display = 'none';
-                });
-            criarBotoes();
-            mudaCorBtns();
-        }
-    })();
-
-    document.getElementById('btn-start').addEventListener('click', function () {
-        // escolhe todos que não sejam o primeiro do tipo
-        var fieldsets = document.querySelectorAll('.fslicer fieldset:not(:first-of-type)');
-        var fieldsetsArr = Array.prototype.slice.call(fieldsets);
-        fieldsetsArr
-            .forEach(x => x.style.display = 'none');
-        criarBotoes();
-    });
-
-    //2.
-    document.getElementsByTagName('form')[0].addEventListener('click', function (e) {
-        var form = document.getElementsByTagName('form')[0];
-        if (e.target && e.target.matches('.atualNext')) {
-            // Confere se o usuario pediu validação
-            if (form.classList.contains('fs-validate')) {
-                prox('x');
-            } else {
-                prox();
-            }
-        } else if (e.target && e.target.matches('.atualPrev')) {
-            prev();
-        }
-    });
-    document.getElementById('btn-start').addEventListener('click', escondeBtn());
+function ultimoFilhoProximoPai(botaoAtual) {
+    'use strict';
+    return botaoAtual.parentNode.nextElementSibling.lastChild;
 }
+
+/** not:
+ * @param elementoDesejado
+ * @returns o ultimo filho do irmão anterior do pai
+ */
+
+
+function ultimoFilhoPreviousPai(botaoAtual) {
+    'use strict'; return botaoAtual.parentNode.previousElementSibling.lastChild;
+}
+
+
+
+// Função para inserir elemento ápos o anterior
+function insertAfter(onde, add) {
+    'use strict'; onde.parentNode.insertBefore(add, onde.nextSibling);
+}
+
+// Fernando
+// Função que criar um span com mensagem de erro depois do input
+// Ele pede o input que está com o erro e criar um span com a msg que vc passa no if lá em cima
+function addErro(x, msg) {
+    // Cria erro
+    'use strict';
+    var erro = document.createElement('span');
+    var textErro = document.createTextNode(msg);
+    erro.appendChild(textErro);
+    erro.classList.add('fsErro');
+    insertAfter(x, erro);
+    x.style.border = '1px solid red';
+}
+
+function limparErros() {
+    'use strict';
+    // Pega todos os erros e deleta
+    var ps = Array.from(document.querySelectorAll('.fsErro'));
+    ps.forEach(x => {
+        if (ps.length > 0) {
+            x.parentNode.removeChild(x);
+        }
+    });
+}
+
 
 /**not:
  * Vi que o plugin jqueryvalidate usava de regras de regex para 
@@ -62,7 +68,7 @@ function main() {
 
 
 function validar() {
-    // Regras tiradas da página do mozilla sobre regex
+    'use strict';
     const regrasREGEX = {
         email: /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         num: /[0-9]/,
@@ -107,149 +113,14 @@ function validar() {
             } else {
 
             }
-        } else {}
-
+        }
     });
 
     // contador === 0 significa que não foi encontrado erros (return true)
     return contador === 0;
 }
 
-// Fernando
-// Função que criar um span com mensagem de erro depois do input
-// Ele pede o input que está com o erro e criar um span com a msg que vc passa no if lá em cima
-function addErro(x, msg) {
-    // Cria erro
-    var erro = document.createElement('span');
-    var textErro = document.createTextNode(msg);
-    erro.appendChild(textErro);
-    erro.classList.add('fsErro');
-    insertAfter(x, erro);
-    x.style.border = '1px solid red';
-}
 
-function limparErros() {
-    // Pega todos os erros e deleta
-    var ps = Array.from(document.querySelectorAll('.fsErro'));
-    ps.forEach(x => {
-        if (ps.length > 0) {
-            x.parentNode.removeChild(x);
-        }
-    });
-}
-
-// Função para inserir elemento ápos o anterior
-function insertAfter(onde, add) {
-    onde.parentNode.insertBefore(add, onde.nextSibling);
-}
-
-
-// Função para mudar a cor dos botões, caso o usuário queira
-// Deixei 4 cores pre definidas: Padrão, Sucesso, Aviso, Erro
-function mudaCorBtns() {
-  var div = document.querySelectorAll('form');
-  var divArr = Array.from(div);
-    divArr.forEach(x => {
-    if(x.classList.contains('fs-padrao')){
-      var cls = ".fs-padrao button";
-      var cor = "#888";
-      mudaCorBtn(cls,cor);  
-    } 
-    if(x.classList.contains('fs-sucesso')){
-      var cls = ".fs-sucesso button";
-      var cor = "#2ecc71";
-      mudaCorBtn(cls,cor);  
-    }
-    if(x.classList.contains('fs-aviso')){
-      var cls = ".fs-aviso button";
-      var cor = "#f1c40f";
-      mudaCorBtn(cls,cor);  
-    }
-    if(x.classList.contains('fs-erro')){
-      var cls = ".fs-erro button";
-      var cor = "#e74c3c";
-      mudaCorBtn(cls,cor);  
-    }
-  })
-  
-}
-
-function mudaCorBtn(cls,cor) {
-  var btns = document.querySelectorAll(cls);
-  var btnsArr = Array.from(btns);
-    btnsArr.forEach(x => {
-      var cor1 = cor;
-      var cor2 = "#fff";
-      var cor3 = "transparent";
-      mudaCor(x, cor1, cor2, cor3);
-   });
-}
-
-function mudaCor(x,cor1,cor2,cor3){
-    x.style.backgroundColor = cor1;        
-    x.style.border = "1px solid "+cor3;
-    x.style.color = cor2;    
-    x.style.padding = "10px";
-    x.style.transition = ".5s";
-
-    x.onmouseover = function() 
-    {
-      this.style.backgroundColor = cor2;        
-      this.style.border = "1px solid "+cor1;
-      this.style.color = cor1;    
-      this.style.padding = "10px";
-      this.style.boxShadow = "0 5px 10px #eee";
-
-    }
-    x.onmouseout = function() 
-    {
-      this.style.backgroundColor = cor1;        
-      this.style.borderColor = cor3;
-      this.style.color = cor2;    
-      this.style.padding = "10px";
-      this.style.boxShadow = "0 5px 10px "+cor3;
-    }
- };
-
-// function fadeOut(x) {
-//     var fadeT = x;
-//     var fadeE = setInterval(function () {
-//         if (!fadeT.style.opacity) {
-//             fadeT.style.opacity = 1;
-//         }
-//         if (fadeT.style.opacity < 0.1) {
-//             clearInterval(fadeE);
-//         } else {
-//             fadeT.style.opacity -= 0.1;
-//         }
-//     }, 100);
-// }
-
-// function fadeIn(x) {
-//     var fadeT = x;
-//     var fadeE = setInterval(function () {
-//         if (!fadeT.style.opacity) {
-//             fadeT.style.opacity = 1;
-//         }
-//         if (fadeT.style.opacity < 0) {
-//             clearInterval(fadeE);
-//         } else {
-//             fadeT.style.opacity += 0.2;
-//         }
-//     }, 1000);
-// }
-
-// Função que verifica os tipos dos inputs no form
-// Estou colocando ela no código principal, assim que terminar, tiro o comentário
-/* 
-    document.querySelector('#ativa').addEventListener('click', function(e){ // Seleciona e adiciona Evento
-        var a = document.getElementsByTagName('form')[0]; // Seleciona Form
-        var inputArr = Array.from(a); // Array do obj 
-            inputArr.forEach(function (x) { 
-                alert(x.type); // Exibe o tipo dele no alerta
-            });
-    });
-*/
 
 /** not: 
  * Reconhece o primeiro botão next, coloca o fieldset (parente) como none 
@@ -263,9 +134,9 @@ function mudaCor(x,cor1,cor2,cor3){
  */
 
 function prox(validate) {
+    'use strict';
     // NEXT
     var botaoAtual = document.getElementsByClassName('atualNext')[0];
-    
     // Usa a função validar para conferir os inputs e liberar o botão
     if (validate !== undefined) {
         if (!validar()) {
@@ -296,6 +167,7 @@ function prox(validate) {
  */
 
 function prev() {
+    'use strict';
     // Previous
     var botaoAtual = document.getElementsByClassName('atualPrev')[0];
     botaoAtual.parentElement.style.display = 'none';
@@ -312,27 +184,6 @@ function prev() {
 
 
 
-/** not:
- * Criei pra melhorar a visualização do código, as classes estavam gigantescas então achei
- * melhor criar essas funções para facilitar a visualização
- * @param elementoDesejado
- * @returns o ultimo filho do irmão do pai
- */
-
-function ultimoFilhoProximoPai(botaoAtual) {
-    return botaoAtual.parentNode.nextElementSibling.lastChild;
-}
-
-/** not:
- * @param elementoDesejado
- * @returns o ultimo filho do irmão anterior do pai
- */
-
-
-function ultimoFilhoPreviousPai(botaoAtual) {
-    return botaoAtual.parentNode.previousElementSibling.lastChild;
-}
-
 
 /** not:
  * Pega as arrays e transforma em uma Array, depois realiza
@@ -343,6 +194,7 @@ function ultimoFilhoPreviousPai(botaoAtual) {
  */
 
 function criarBotoes() {
+    'use strict';
     var fieldsets = document.querySelectorAll('#fslicer fieldset');
     var fieldsetArr = Array.prototype.slice.call(fieldsets)
         .forEach(function (x) {
@@ -368,8 +220,172 @@ function criarBotoes() {
 }
 
 function escondeBtn() {
+    'use strict';
     var btn = document.getElementById('btn-start');
     btn.style.display = 'none';
 }
+
+function mudaCor(x, cor1, cor2, cor3) {
+    'use strict';
+    x.style.backgroundColor = cor1;
+    x.style.border = '1px solid ' + cor3;
+    x.style.color = cor2;
+    x.style.padding = '10px';
+    x.style.transition = '.5s';
+
+    x.onmouseover = function () {
+        this.style.backgroundColor = cor2;
+        this.style.border = '1px solid ' + cor1;
+        this.style.color = cor1;
+        this.style.padding = '10px';
+        this.style.boxShadow = '0 5px 10px #eee';
+
+    };
+    x.onmouseout = function () {
+        this.style.backgroundColor = cor1;
+        this.style.borderColor = cor3;
+        this.style.color = cor2;
+        this.style.padding = '10px';
+        this.style.boxShadow = '0 5px 10px ' + cor3;
+    };
+}
+
+
+function mudaCorBtn(cls, cor) {
+    'use strict';
+    var btns = document.querySelectorAll(cls);
+    var btnsArr = Array.from(btns);
+    btnsArr.forEach(x => {
+        var cor1 = cor;
+        var cor2 = '#fff';
+        var cor3 = 'transparent';
+        mudaCor(x, cor1, cor2, cor3);
+    });
+}
+
+
+// Função para mudar a cor dos botões, caso o usuário queira
+// Deixei 4 cores pre definidas: Padrão, Sucesso, Aviso, Erro
+function mudaCorBtns() {
+    'use strict';
+    var div = document.querySelectorAll('form');
+    var divArr = Array.from(div);
+    divArr.forEach(x => {
+        if (x.classList.contains('fs-padrao')) {
+            var cls = '.fs-padrao button';
+            var cor = '#888';
+            mudaCorBtn(cls, cor);
+        }
+        if (x.classList.contains('fs-sucesso')) {
+            var cls = '.fs-sucesso button';
+            var cor = '#2ecc71';
+            mudaCorBtn(cls, cor);
+        }
+        if (x.classList.contains('fs-aviso')) {
+            var cls = '.fs-aviso button';
+            var cor = '#f1c40f';
+            mudaCorBtn(cls, cor);
+        }
+        if (x.classList.contains('fs-erro')) {
+            var cls = '.fs-erro button';
+            var cor = '#e74c3c';
+            mudaCorBtn(cls, cor);
+        }
+    });
+}
+
+
+/** not:
+ * 
+ * Esconde todos os fieldsets que não sejam o primeiro,
+ * Eventlistener para o next e previous.
+ */
+
+function main() {
+    //1.
+    'use strict';
+    (function mostrar() {
+        var fslicer = document.querySelectorAll('#fslicer');
+        if (fslicer.length > 0) {
+            var fieldsets = document.querySelectorAll('#fslicer fieldset:not(:first-of-type)');
+            var fieldsetsArr = Array.prototype.slice.call(fieldsets);
+            fieldsetsArr
+                .forEach(x => {
+                    x.style.display = 'none';
+                });
+            criarBotoes();
+            mudaCorBtns();
+        }
+    })();
+
+
+    document.getElementById('btn-start').addEventListener('click', function () {
+        // escolhe todos que não sejam o primeiro do tipo
+        var fieldsets = document.querySelectorAll('.fslicer fieldset:not(:first-of-type)');
+        var fieldsetsArr = Array.prototype.slice.call(fieldsets);
+        fieldsetsArr
+            .forEach(x => x.style.display = 'none');
+        criarBotoes();
+    });
+
+    //2.
+    document.getElementsByTagName('form')[0].addEventListener('click', function (e) {
+        var form = document.getElementsByTagName('form')[0];
+        if (e.target && e.target.matches('.atualNext')) {
+            // Confere se o usuario pediu validação
+            if (form.classList.contains('fs-validate')) {
+                prox('x');
+            } else {
+                prox();
+            }
+        } else if (e.target && e.target.matches('.atualPrev')) {
+            prev();
+        }
+    });
+
+    // Apresentação
+
+    document.querySelectorAll('.apresentNValidar')[0].addEventListener('click', function () {
+        let form = document.querySelector('.fs-apresent');
+        form.classList.remove('fs-validate');
+    });
+
+    document.querySelectorAll('.apresentValidar')[0].addEventListener('click', function () {
+        let form = document.querySelector('.fs-apresent');
+        form.classList.add('fs-validate');
+    });
+
+    document.getElementById('btn-start').addEventListener('click', escondeBtn());
+}
+
+
+// function fadeOut(x) {
+//     var fadeT = x;
+//     var fadeE = setInterval(function () {
+//         if (!fadeT.style.opacity) {
+//             fadeT.style.opacity = 1;
+//         }
+//         if (fadeT.style.opacity < 0.1) {
+//             clearInterval(fadeE);
+//         } else {
+//             fadeT.style.opacity -= 0.1;
+//         }
+//     }, 100);
+// }
+
+// function fadeIn(x) {
+//     var fadeT = x;
+//     var fadeE = setInterval(function () {
+//         if (!fadeT.style.opacity) {
+//             fadeT.style.opacity = 1;
+//         }
+//         if (fadeT.style.opacity < 0) {
+//             clearInterval(fadeE);
+//         } else {
+//             fadeT.style.opacity += 0.2;
+//         }
+//     }, 1000);
+// }
+
 /** Prepara função ao ativar tela */
 window.onload = main;

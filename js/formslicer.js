@@ -19,9 +19,23 @@ function main() {
             criarBotoes();
             mudaCorBtns();
         }
-    })();
+    }());
 
-    document.getElementById('btn-start').addEventListener('click', function () {
+    document.querySelectorAll('apresentNValidar')[0].addEventListener('click', function () {
+        let form = document.querySelector('.fs-apresent')[0];
+        if (form.classList.contains('fs-validate')) {
+            form.classList.remove('fs-validate');
+        };
+    });
+
+    document.querySelectorAll('apresentValidar')[0].addEventListener('click', function () {
+        let form = document.querySelector('.fs-apresent')[0];
+        if (!form.classList.contains('fs-validate')) {
+            form.classList.add('fs-validate');
+        };
+    });
+
+    document.querySelectorAll('btn-start').addEventListener('click', function () {
         // escolhe todos que não sejam o primeiro do tipo
         var fieldsets = document.querySelectorAll('.fslicer fieldset:not(:first-of-type)');
         var fieldsetsArr = Array.prototype.slice.call(fieldsets);
@@ -62,7 +76,6 @@ function main() {
 
 
 function validar() {
-    // Regras tiradas da página do mozilla sobre regex
     const regrasREGEX = {
         email: /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         num: /[0-9]/,
@@ -107,7 +120,7 @@ function validar() {
             } else {
 
             }
-        } else {}
+        } else { }
 
     });
 
@@ -147,69 +160,67 @@ function insertAfter(onde, add) {
 // Função para mudar a cor dos botões, caso o usuário queira
 // Deixei 4 cores pre definidas: Padrão, Sucesso, Aviso, Erro
 function mudaCorBtns() {
-  var div = document.querySelectorAll('form');
-  var divArr = Array.from(div);
+    var div = document.querySelectorAll('form');
+    var divArr = Array.from(div);
     divArr.forEach(x => {
-    if(x.classList.contains('fs-padrao')){
-      var cls = ".fs-padrao button";
-      var cor = "#888";
-      mudaCorBtn(cls,cor);  
-    } 
-    if(x.classList.contains('fs-sucesso')){
-      var cls = ".fs-sucesso button";
-      var cor = "#2ecc71";
-      mudaCorBtn(cls,cor);  
-    }
-    if(x.classList.contains('fs-aviso')){
-      var cls = ".fs-aviso button";
-      var cor = "#f1c40f";
-      mudaCorBtn(cls,cor);  
-    }
-    if(x.classList.contains('fs-erro')){
-      var cls = ".fs-erro button";
-      var cor = "#e74c3c";
-      mudaCorBtn(cls,cor);  
-    }
-  })
-  
+        if (x.classList.contains('fs-padrao')) {
+            var cls = ".fs-padrao button";
+            var cor = "#888";
+            mudaCorBtn(cls, cor);
+        }
+        if (x.classList.contains('fs-sucesso')) {
+            var cls = ".fs-sucesso button";
+            var cor = "#2ecc71";
+            mudaCorBtn(cls, cor);
+        }
+        if (x.classList.contains('fs-aviso')) {
+            var cls = ".fs-aviso button";
+            var cor = "#f1c40f";
+            mudaCorBtn(cls, cor);
+        }
+        if (x.classList.contains('fs-erro')) {
+            var cls = ".fs-erro button";
+            var cor = "#e74c3c";
+            mudaCorBtn(cls, cor);
+        }
+    })
+
 }
 
-function mudaCorBtn(cls,cor) {
-  var btns = document.querySelectorAll(cls);
-  var btnsArr = Array.from(btns);
+function mudaCorBtn(cls, cor) {
+    var btns = document.querySelectorAll(cls);
+    var btnsArr = Array.from(btns);
     btnsArr.forEach(x => {
-      var cor1 = cor;
-      var cor2 = "#fff";
-      var cor3 = "transparent";
-      mudaCor(x, cor1, cor2, cor3);
-   });
+        var cor1 = cor;
+        var cor2 = "#fff";
+        var cor3 = "transparent";
+        mudaCor(x, cor1, cor2, cor3);
+    });
 }
 
-function mudaCor(x,cor1,cor2,cor3){
-    x.style.backgroundColor = cor1;        
-    x.style.border = "1px solid "+cor3;
-    x.style.color = cor2;    
+function mudaCor(x, cor1, cor2, cor3) {
+    x.style.backgroundColor = cor1;
+    x.style.border = "1px solid " + cor3;
+    x.style.color = cor2;
     x.style.padding = "10px";
     x.style.transition = ".5s";
 
-    x.onmouseover = function() 
-    {
-      this.style.backgroundColor = cor2;        
-      this.style.border = "1px solid "+cor1;
-      this.style.color = cor1;    
-      this.style.padding = "10px";
-      this.style.boxShadow = "0 5px 10px #eee";
+    x.onmouseover = function () {
+        this.style.backgroundColor = cor2;
+        this.style.border = "1px solid " + cor1;
+        this.style.color = cor1;
+        this.style.padding = "10px";
+        this.style.boxShadow = "0 5px 10px #eee";
 
     }
-    x.onmouseout = function() 
-    {
-      this.style.backgroundColor = cor1;        
-      this.style.borderColor = cor3;
-      this.style.color = cor2;    
-      this.style.padding = "10px";
-      this.style.boxShadow = "0 5px 10px "+cor3;
+    x.onmouseout = function () {
+        this.style.backgroundColor = cor1;
+        this.style.borderColor = cor3;
+        this.style.color = cor2;
+        this.style.padding = "10px";
+        this.style.boxShadow = "0 5px 10px " + cor3;
     }
- };
+};
 
 // function fadeOut(x) {
 //     var fadeT = x;
@@ -265,7 +276,7 @@ function mudaCor(x,cor1,cor2,cor3){
 function prox(validate) {
     // NEXT
     var botaoAtual = document.getElementsByClassName('atualNext')[0];
-    
+
     // Usa a função validar para conferir os inputs e liberar o botão
     if (validate !== undefined) {
         if (!validar()) {
