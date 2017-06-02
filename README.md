@@ -1,22 +1,58 @@
 # FormSlicer
 
-## O que é?
+
+
+### O que é?
 Uma biblioteca de criação de formulários de várias páginas. Feito principalmente visando a criação de orçamentos e contatos iniciais com clientes.
 
-## Observação
+Com o formSlicer você pode transformar formulários enormes em múltiplas etapas, somente com a utilização de um id! 
+
+Além disso você pode escolher entre cores e validação utilizando javascript puro, sem também necessitar de um arquivo css adicional.
+
+### Observação
 O package contém um arquivo chamado "index.html", que é um exemplo de como deve ficar o seu formulário ao instalar o FormSlicer.
 
-## Instalação
+### Instalação
 
 	$ npm install form-slicer
 
-## Usando
+	git clone github.com/SadboysAcademy/FormSlicer.git
+
+
+
+### Usando
 
 	var formSlicer = require("form-slicer");
 
-## Mantidas por
+Ou basta referenciar após o seu código principal
 
-[Gabriel Craveiro](gabrielcraveiro.github.io)
+	<!-- FormSlicer -->
+
+	<script src="js/formslicer.min.js"></script>
+
+Em um formulário coloque o id #fslicer para ativar, todas as fieldsets que não forem a primeira irão ser escondidas. Os botões de next são criados automaticamente.
+
+Validação:
+
+	<form name="form" action="" id="fslicer" class="fs-validate">
+
+Cores:
+
+A biblioteca vem também com cores padrões para os botões, só é necessário colocar a classe correspondente no formulário
+
+![](http://imgur.com/UgTO6mI.gif) ![](http://imgur.com/GYNwb4Z.gif) ![](http://imgur.com/GXhcOWc.gif) ![](http://imgur.com/jzGlFnq.gif)
+
+
+	<form action="" id="fslicer" class="fs-padrao">
+	<form action="" id="fslicer" class="fs-erro">
+	<form action="" id="fslicer" class="fs-sucesso">
+	<form action="" id="fslicer" class="fs-aviso">
+
+### Mantidas por
+
+* [Gabriel Craveiro](gabrielcraveiro.github.io)
+* [Fernando Moreira](ihfernando.github.io)
+* Leonardo Abreu
 
 ### License
 
