@@ -14,6 +14,9 @@ O package contém um arquivo chamado "index.html", que é um exemplo de como dev
 
 	var formSlicer = require("form-slicer");
 
+## Mantidas por
+
+[Gabriel Craveiro](gabrielcraveiro.github.io)
 
 ### License
 

@@ -6,7 +6,6 @@
  */
 
 function ultimoFilhoProximoPai(botaoAtual) {
-  'use strict';
   return botaoAtual.parentNode.nextElementSibling.lastChild;
 }
 
@@ -17,14 +16,12 @@ function ultimoFilhoProximoPai(botaoAtual) {
 
 
 function ultimoFilhoPreviousPai(botaoAtual) {
-  'use strict'; return botaoAtual.parentNode.previousElementSibling.lastChild;
+  return botaoAtual.parentNode.previousElementSibling.lastChild;
 }
-
-
 
 // Função para inserir elemento ápos o anterior
 function insertAfter(onde, add) {
-  'use strict'; onde.parentNode.insertBefore(add, onde.nextSibling);
+  onde.parentNode.insertBefore(add, onde.nextSibling);
 }
 
 // Fernando
@@ -32,9 +29,8 @@ function insertAfter(onde, add) {
 // Ele pede o input que está com o erro e cria um span com a msg que vc passa no if lá em cima
 function addErro(x, msg) {
   // Cria erro
-  'use strict';
-  var erro = document.createElement('span');
-  var textErro = document.createTextNode(msg);
+  const erro = document.createElement('span');
+  const textErro = document.createTextNode(msg);
   erro.appendChild(textErro);
   erro.classList.add('fsErro');
   insertAfter(x, erro);
@@ -42,9 +38,8 @@ function addErro(x, msg) {
 }
 
 function limparErros() {
-  'use strict';
   // Pega todos os erros e deleta
-  var ps = Array.from(document.querySelectorAll('.fsErro'));
+  let ps = Array.from(document.querySelectorAll('.fsErro'));
   ps.forEach(x => {
     if (ps.length > 0) {
       x.parentNode.removeChild(x);
@@ -54,21 +49,20 @@ function limparErros() {
 
 
 /**not:
- * Vi que o plugin jqueryvalidate usava de regras de regex para 
- * validar, então tive a ideia de usar essas 
+ * Vi que o plugin jqueryvalidate usava de regras de regex para
+ * validar, então tive a ideia de usar essas
  * regras dentro de objetos para o mesmo.
- * 
- * Cria uma array com todos os inputs atuais. Para cada ele 
+ *
+ * Cria uma array com todos os inputs atuais. Para cada ele
  * realiza um teste de regex com o value, aumentando o contador
- * a cada erro. 
- * 
+ * a cada erro.
+ *
  * Retorna true caso não tenha nenhum erro
- * 
+ *
  */
 
 
 function validar() {
-  'use strict';
   const regrasREGEX = {
     email: /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     num: /[0-9]/,
@@ -76,37 +70,37 @@ function validar() {
     nome: /[a-zA-Z]{5,15}/,
   };
   let contador = 0;
-  var botaoAtual = document.querySelector('.atualNext');
-  var inputs = botaoAtual.parentNode.getElementsByTagName('input');
-  var inputsArr = Array.from(inputs);
+  let botaoAtual = document.querySelector('.atualNext');
+  let inputs = botaoAtual.parentNode.getElementsByTagName('input');
+  let inputsArr = Array.from(inputs);
   inputsArr.forEach(x => {
     if (x.type === 'text') {
       if (!regrasREGEX.texto.test(x.value)) {
         x.placeholder = 'Campo inválido';
         const msg = ' Campo inválido';
         addErro(x, msg); // Chama função que cria span e passa a msg
-        contador++;
+        contador += 1;
       }
     } else if (x.type === 'number') {
       if (!regrasREGEX.num.test(x.value)) {
         x.placeholder = 'Campo inválido';
         const msg = ' Deve conter apenas números ou está vazio.';
         addErro(x, msg);
-        contador++;
+        contador += 1;
       }
     } else if (x.type === 'email') {
       if (!regrasREGEX.email.test(x.value)) {
         x.placeholder = 'Email inválido';
         const msg = ' Email não atende aos padrões.';
         addErro(x, msg); // Chama função que cria span e passa a msg
-        contador++;
+        contador += 1;
       }
     } else if (x.type === 'password') {
       if (!regrasREGEX.nome.test(x.value)) {
         x.placeholder = 'Erro na senha';
         const msg = 'Campo inválido';
         addErro(x, msg);
-        contador++;
+        contador += 1;
       }
     }
   });
@@ -116,21 +110,20 @@ function validar() {
 
 
 
-/** not: 
- * Reconhece o primeiro botão next, coloca o fieldset (parente) como none 
+/** not:
+ * Reconhece o primeiro botão next, coloca o fieldset (parente) como none
  * pega o proximo fieldset irmão do parente e coloca block.
- * 
- * Se o ultimo elemento do proximo fieldset for também um botão que possui a classe next 
+ *
+ * Se o ultimo elemento do proximo fieldset for também um botão que possui a classe next
  * (para então não dar erro com o botão de previous) ele coloca .atualNext nele.
- * Se ele possuir um botão antes (prev) ele coloca atualPrev. 
+ * Se ele possuir um botão antes (prev) ele coloca atualPrev.
  * Se não existir mais um next (else) ele coloca esse botao como atualPrev
- * 
+ *
  */
 
 function prox(validate) {
-  'use strict';
   // NEXT
-  var botaoAtual = document.getElementsByClassName('atualNext')[0];
+  let botaoAtual = document.getElementsByClassName('atualNext')[0];
   // Se a função receber parametro, então ela realiza a validação
   if (validate !== undefined) {
     // Se a validação retornar false ele cancela o prox
@@ -150,21 +143,20 @@ function prox(validate) {
   botaoAtual.classList.remove('atualNext');
 }
 
-/** not: 
- * Reconhece o primeiro botão atualPrev, coloca o fieldset (parente) como display:none 
+/** not:
+ * Reconhece o primeiro botão atualPrev, coloca o fieldset (parente) como display:none
  * pega o proximo fieldset irmão do parente e coloca block.
- * 
- * No if ele pega o pai, depois pega o ultimo elemento igual ao pai antes dele, 
+ *
+ * No if ele pega o pai, depois pega o ultimo elemento igual ao pai antes dele,
  * procura o ultimo filho, pega o ultimo irmão e ve se é next ou previous
- * a confusão maior é pra manter o atualNext e na hora que acaba os previous, 
+ * a confusão maior é pra manter o atualNext e na hora que acaba os previous,
  * mas isso é resolvido no else (que ve se ele possui um irmao pro ultimo filho).
- * 
+ *
  */
 
 function prev() {
-  'use strict';
   // Previous
-  var botaoAtual = document.getElementsByClassName('atualPrev')[0];
+  let botaoAtual = document.getElementsByClassName('atualPrev')[0];
   botaoAtual.parentElement.style.display = 'none';
   botaoAtual.parentElement.previousElementSibling.style.display = 'block';
   if (ultimoFilhoPreviousPai(botaoAtual).previousElementSibling.classList.contains('prev')) {
@@ -185,19 +177,18 @@ function prev() {
  * a criação dos botões next e previous com as devidas classes
  * o primeiro botão next vem com a classe atualNext para
  * depois possibilitar a navegação
- * 
+ *
  */
 
 function criarBotoes() {
-  'use strict';
-  var fieldsets = document.querySelectorAll('#fslicer fieldset');
-  var fieldsetArr = Array.prototype.slice.call(fieldsets)
+  let fieldsets = document.querySelectorAll('#fslicer fieldset');
+  let fieldsetArr = Array.prototype.slice.call(fieldsets)
     .forEach(function (x) {
-      var prev = document.createElement('button');
+      let prev = document.createElement('button');
       prev.classList.add('prev', 'bgt');
       prev.textContent = 'voltar';
       prev.type = 'button';
-      var next = document.createElement('button');
+      let next = document.createElement('button');
       next.classList.add('next', 'bgt');
       next.textContent = 'avançar';
       next.type = 'button';
@@ -215,13 +206,11 @@ function criarBotoes() {
 }
 
 function escondeBtn() {
-  'use strict';
-  var btn = document.getElementById('btn-start');
+  const btn = document.getElementById('btn-start');
   btn.style.display = 'none';
 }
 
 function mudaCor(x, cor1, cor2, cor3) {
-  'use strict';
   x.style.backgroundColor = cor1;
   x.style.border = '1px solid ' + cor3;
   x.style.color = cor2;
@@ -247,13 +236,13 @@ function mudaCor(x, cor1, cor2, cor3) {
 
 
 function mudaCorBtn(cls, cor) {
-  'use strict';
-  var btns = document.querySelectorAll(cls);
-  var btnsArr = Array.from(btns);
+
+  let btns = document.querySelectorAll(cls);
+  let btnsArr = Array.from(btns);
   btnsArr.forEach(x => {
-    var cor1 = cor;
-    var cor2 = '#fff';
-    var cor3 = 'transparent';
+    let cor1 = cor;
+    let cor2 = '#fff';
+    let cor3 = 'transparent';
     mudaCor(x, cor1, cor2, cor3);
   });
 }
@@ -262,28 +251,27 @@ function mudaCorBtn(cls, cor) {
 // Função para mudar a cor dos botões, caso o usuário queira
 // Deixei 4 cores pre definidas: Padrão, Sucesso, Aviso, Erro
 function mudaCorBtns() {
-  'use strict';
-  var div = document.querySelectorAll('form');
-  var divArr = Array.from(div);
-  divArr.forEach(x => {
+  let div = document.querySelectorAll('form');
+  let diletr = Array.from(div);
+  diletr.forEach(x => {
     if (x.classList.contains('fs-padrao')) {
-      var cls = '.fs-padrao button';
-      var cor = '#888';
+      let cls = '.fs-padrao button';
+      let cor = '#888';
       mudaCorBtn(cls, cor);
     }
     if (x.classList.contains('fs-sucesso')) {
-      var cls = '.fs-sucesso button';
-      var cor = '#2ecc71';
+      let cls = '.fs-sucesso button';
+      let cor = '#2ecc71';
       mudaCorBtn(cls, cor);
     }
     if (x.classList.contains('fs-aviso')) {
-      var cls = '.fs-aviso button';
-      var cor = '#f1c40f';
+      let cls = '.fs-aviso button';
+      let cor = '#f1c40f';
       mudaCorBtn(cls, cor);
     }
     if (x.classList.contains('fs-erro')) {
-      var cls = '.fs-erro button';
-      var cor = '#e74c3c';
+      let cls = '.fs-erro button';
+      let cor = '#e74c3c';
       mudaCorBtn(cls, cor);
     }
   });
@@ -291,19 +279,19 @@ function mudaCorBtns() {
 
 
 /** not:
- * 
+ *
  * Esconde todos os fieldsets que não sejam o primeiro,
  * Eventlistener para o next e previous.
  */
 
 function main() {
   //1.
-  'use strict';
+
   (function mostrar() {
-    var fslicer = document.querySelectorAll('#fslicer');
+    let fslicer = document.querySelectorAll('#fslicer');
     if (fslicer.length > 0) {
-      var fieldsets = document.querySelectorAll('#fslicer fieldset:not(:first-of-type)');
-      var fieldsetsArr = Array.prototype.slice.call(fieldsets);
+      let fieldsets = document.querySelectorAll('#fslicer fieldset:not(:first-of-type)');
+      let fieldsetsArr = Array.prototype.slice.call(fieldsets);
       fieldsetsArr
         .forEach(x => {
           x.style.display = 'none';
@@ -315,8 +303,8 @@ function main() {
 
   document.getElementById('btn-start').addEventListener('click', function () {
     // escolhe todos que não sejam o primeiro do tipo
-    var fieldsets = document.querySelectorAll('.fslicer fieldset:not(:first-of-type)');
-    var fieldsetsArr = Array.prototype.slice.call(fieldsets);
+    let fieldsets = document.querySelectorAll('.fslicer fieldset:not(:first-of-type)');
+    let fieldsetsArr = Array.prototype.slice.call(fieldsets);
     fieldsetsArr
       .forEach(x => x.style.display = 'none');
     criarBotoes();
@@ -324,7 +312,7 @@ function main() {
 
   //2.
   document.getElementsByTagName('form')[0].addEventListener('click', function (e) {
-    var form = document.getElementsByTagName('form')[0];
+    let form = document.getElementsByTagName('form')[0];
     if (e.target && e.target.matches('.atualNext')) {
       // Confere se o usuario pediu validação
       if (form.classList.contains('fs-validate')) {
@@ -354,8 +342,8 @@ function main() {
 
 
 // function fadeOut(x) {
-//     var fadeT = x;
-//     var fadeE = setInterval(function () {
+//     let fadeT = x;
+//     let fadeE = setInterval(function () {
 //         if (!fadeT.style.opacity) {
 //             fadeT.style.opacity = 1;
 //         }
@@ -368,8 +356,8 @@ function main() {
 // }
 
 // function fadeIn(x) {
-//     var fadeT = x;
-//     var fadeE = setInterval(function () {
+//     let fadeT = x;
+//     let fadeE = setInterval(function () {
 //         if (!fadeT.style.opacity) {
 //             fadeT.style.opacity = 1;
 //         }
@@ -381,5 +369,5 @@ function main() {
 //     }, 1000);
 // }
 
-/** Prepara função ao ativar tela */
+/** Prepara função ao atilet tela */
 window.onload = main;
