@@ -40,7 +40,7 @@ Cores:
 
 A biblioteca vem também com cores padrões para os botões, só é necessário colocar a classe correspondente no formulário
 
-![](http://imgur.com/UgTO6mI.gif) ![](http://imgur.com/GYNwb4Z.gif) ![](http://imgur.com/GXhcOWc.gif) ![](http://imgur.com/jzGlFnq.gif)
+![](http://imgur.com/UgTO6mI.gif) ![](http://imgur.com/GYNwb4Z.gif) ![](http://imgur.com/MAmQ0hp.gif) ![](http://imgur.com/jzGlFnq.gif)
 
 
 	<form action="" id="fslicer" class="fs-padrao">
