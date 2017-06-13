@@ -1,7 +1,6 @@
 # FormSlicer
 
-
-
+[![NPM](https://nodei.co/npm/form-slicer.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/form-slicer/)
 ### O que é?
 Uma biblioteca de criação de formulários de várias páginas. Feito principalmente visando a criação de orçamentos e contatos iniciais com clientes.
 
