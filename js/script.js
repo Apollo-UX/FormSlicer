@@ -21,15 +21,6 @@ function main() {
         }
     })();
 
-    document.getElementById('btn-start').addEventListener('click', function () {
-        // escolhe todos que não sejam o primeiro do tipo
-        var fieldsets = document.querySelectorAll('.fslicer fieldset:not(:first-of-type)');
-        var fieldsetsArr = Array.prototype.slice.call(fieldsets);
-        fieldsetsArr
-            .forEach(x => x.style.display = 'none');
-        criarBotoes();
-    });
-
     //2.
     document.getElementsByTagName('form')[0].addEventListener('click', function (e) {
         var form = document.getElementsByTagName('form')[0];
@@ -44,7 +35,6 @@ function main() {
             prev();
         }
     });
-    document.getElementById('btn-start').addEventListener('click', escondeBtn());
 }
 
 /**not:
@@ -236,6 +226,7 @@ function mudaCor(x,cor1,cor2,cor3){
 
 function prox(validate) {
     // NEXT
+    var botaoAtual = document.getElementsByClassName('atualNext')[0];
     
     // Usa a função validar para conferir os inputs e liberar o botão
     if (validate !== undefined) {
@@ -321,8 +312,9 @@ function criarBotoes() {
             prev.classList.add('prev', 'bgt');
             prev.textContent = 'voltar';
             prev.type = 'button';
+
             var next = document.createElement('button');
-            next.classList.add('next', 'bgt');
+            next.classList.add('next', 'bgt')
             next.textContent = 'avançar';
             next.type = 'button';
 
@@ -338,9 +330,5 @@ function criarBotoes() {
         });
 }
 
-function escondeBtn() {
-    var btn = document.getElementById('btn-start');
-    btn.style.display = 'none';
-}
 /** Prepara função ao ativar tela */
 window.onload = main;
