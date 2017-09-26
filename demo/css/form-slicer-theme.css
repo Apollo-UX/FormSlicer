@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+/* Buttons */
+.fs-btn_default, .fs-btn_success, .fs-btn_warning, .fs-btn_danger {
+  font-family: 'Source Sans Pro', sans-serif;
+  letter-spacing: 0.8px;
+  color: #fff;
+  padding: 2%;
+  border: 0;
+  border-radius: 50px;
+  font-weight: bolder;
+  box-shadow: 0 3px 6px #ccc;
+  outline: none;
+  transition: 1s;
+}
+
+/* Colors */
+.fs-btn_default {
+  background: #616161;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #9bc5c3, #616161);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #9bc5c3, #616161); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fs-btn_success {
+  background: #DCE35B;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #45B649, #DCE35B);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #45B649, #DCE35B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fs-btn_warning {
+  background: #D1913C;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FFD194, #D1913C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fs-btn_danger {
+  background: #cb2d3e;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* Hover, Active, Focus */
+.fs-btn_default:hover,.fs-btn_default:active,
+.fs-btn_default:focus {
+  background: #616161;
+  background: -webkit-linear-gradient(to left, #616161, #616161);
+  background: linear-gradient(to left, #616161, #616161);
+}
+.fs-btn_success:hover,.fs-btn_success:active,
+.fs-btn_success:focus {
+  background: #DCE35B;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #45B649, #45B649);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #45B649, #45B649); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fs-btn_warning:hover,.fs-btn_warning:active,
+.fs-btn_warning:focus {
+  background: #D1913C;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #D1913C, #D1913C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #D1913C, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fs-btn_danger:hover,.fs-btn_danger:active,
+.fs-btn_danger:focus {
+  background: #cb2d3e;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #cb2d3e, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #cb2d3e, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* Transition */
+.fs-btn_default:hover,.fs-btn_default:active,
+.fs-btn_default:focus,
+.fs-btn_success:hover,.fs-btn_success:active,
+.fs-btn_success:focus,
+.fs-btn_warning:hover,.fs-btn_warning:active,
+.fs-btn_warning:focus,
+.fs-btn_danger:hover,.fs-btn_danger:active,
+.fs-btn_danger:focus {
+  cursor: pointer;
+  transform: scale(1.1,1.1);
+  transition: .8s cubic-bezier(.17,.67,.83,.67);
+}
