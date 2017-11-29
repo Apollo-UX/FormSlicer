@@ -55,28 +55,67 @@
 		</li>
 	</ul>
 
+	<!-- Hero -->
+
 	<section class="hero">
 		<p class="margin-top">Create your next multi-step form</p>
 		<h1>Form-Slicer</h1>
 		<p>
-			<a class="btn btn-lg btn-danger btn-fs" href="#" role="button">Get Started</a>
+			<a class="btn btn-danger btn-fs" href="#" role="button">Get Started</a>
 		</p>
 	</section>
 
-	<section class="wrapper">
-		<p>Transform your form into steps</p>
-		<pre class='code code-html'><label>HTML</label><code>&lt;button&gt;Press Me!&lt;/button&gt;</code></pre>
-	</section>
+	<!-- Sobre HTML -->
 
-	<section class="wrapper">
-		<pre class='code code-javascript'><label>JS</label><code>&lt;button onclick="myFunction()"&gt;Post&lt;/button&gt;
-			
-			&lt;script&gt;
-			function myFunction() {
-					document.write(5 + 6);
-			}
-			&lt;/script&gt;</code>
-		</pre>
+	<section class="wrapper container">
+		<p>Transform your fieldsets into steps</p>
+		<div class="col">
+			<form name="form" action="" id="fslicer" class="fs-slicer">
+				<fieldset>
+					<legend>
+						<span>1</span> de 3</legend>
+					<label>What is your name ?
+					</label>
+					<br>
+					<input type="text" name="nome" id="nome2" placeholder="Digite seu nome..." required />
+					<br>
+				</fieldset>
+				<fieldset>
+					<legend>
+						<span>2</span> de 3</legend>
+					<label>How old are you?
+					</label>
+					<br>
+					<input type="number" required />
+					<br>
+				</fieldset>
+				<fieldset>
+					<legend>
+						<span>3</span> de 3</legend>
+					<label>Where are you from ?
+					</label>
+					<br>
+					<input type="number" required />
+					<br>
+				</fieldset>
+			</form>
+		</div>
+		<pre class='code code-html'><label>HTML</label><code>
+&lt;form name="form" <span class="cor">id="fslicer" class="fs-slicer" </span>&gt;
+	&lt;fieldset&gt;
+		&lt;legend&gt; 1 de 2 /legend&gt;
+			&lt;label&gt;What is your name? &lt;/label&gt;
+		&lt;input type="text" required /&gt;
+	&lt;/fieldset&gt;
+	&lt;fieldset&gt;
+		&lt;legend&gt; 2 de 2/legend&gt;
+			&lt;label&gt; How old are you? &lt;/label&gt;
+		&lt;input type="number" required /&gt;
+	&lt;/fieldset&gt;
+&lt;/form&gt;
+						</code>
+					</pre>
+		</div>
 	</section>
 
 	<!-- Script -->
@@ -87,9 +126,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
+	<script src="js/form-slicer.js"></script>
 	<script src="js/init.js"></script>
 
-	<!-- GOOGLE -->
 </body>
 
 </html>

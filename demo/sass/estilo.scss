@@ -23,14 +23,12 @@ body {
 	width: 100vw;
 	text-align: center;
 	height: 70vh;
-
 	h1 {
 		font-size: 3em;
 		color: $cor-1;
 		font-weight: bold;
 		margin-bottom: 40px;
 	}
-
 	p {
 		font-size: 1.5em;
 		font-weight: lighter;
@@ -48,8 +46,11 @@ body {
 	color: $cor-0;
 }
 
+.btn-fs,
 .btn-fs:hover,
-.btn-fs:focus {
+.btn-fs:focus,
+.btn-fs:active,
+.btn-fs:visited {
 	color: $cor-0;
 }
 
@@ -70,10 +71,17 @@ body {
 		font-size: 1.3em;
 		color: $cor-1;
 	}
+	div {
+		margin: 0 auto;
+	}
+}
+
+.fs-slicer {
+	text-align: center;
 }
 
 pre {
-	max-width: 760px;
+	max-width: 600px;
 	background: #fff;
 	white-space: pre;
 	word-wrap: break-word;
@@ -91,9 +99,8 @@ pre.code {
 }
 
 pre.code label {
-	font-family: sans-serif;
 	font-weight: normal;
-	font-size: 13px;
+	font-size: 14px;
 	color: #444;
 	position: absolute;
 	left: 1px;
@@ -143,7 +150,7 @@ pre.code-css code {
 }
 
 pre.code-html code {
-	color: #558b2f;
+	color: #78909c;
 }
 
 pre.code-javascript code {
@@ -152,6 +159,15 @@ pre.code-javascript code {
 
 pre.code-jquery code {
 	color: #78909c;
+}
+
+// form
+form {
+	margin: auto;
+}
+
+.cor {
+	color: $cor-1;
 }
 
 @import 'mobile';

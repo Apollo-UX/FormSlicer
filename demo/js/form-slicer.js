@@ -19,7 +19,6 @@ const main = () => {
                     x.style.display = 'none';
                 });
             criarBotoes();
-            mudaCorBtns();
         }
     })();
 
